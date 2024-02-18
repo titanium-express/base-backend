@@ -1,24 +1,28 @@
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:mysql1/mysql1.dart';
+import 'package:commons_core/commons_core.dart';
 
 void main(List<String> arguments) async {
-  final conn = await MySqlConnection.connect(ConnectionSettings(
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    db: 'delivery',
-    password: 'root',
-  ));
+  var res = await CustomEnv.get<String>(key: 'key');
+  print(res);
 
-  // await conn
-  //     .query("INSERT INTO tb_roles(name, status) values ('MANAGER', 'A') ");
+  // final conn = await MySqlConnection.connect(ConnectionSettings(
+  //   host: 'localhost',
+  //   port: 3306,
+  //   user: 'root',
+  //   db: 'delivery',
+  //   password: 'root',
+  // ));
 
-  print(await conn.query('select * from tb_roles'));
+  // // await conn
+  // //     .query("INSERT INTO tb_roles(name, status) values ('MANAGER', 'A') ");
 
-  await serve(
-      (Request req) => Response(200,
-          body: 'Olá, mundo!', headers: {'content-type': 'application/json'}),
-      'localhost',
-      8081);
+  // print(await conn.query('select * from tb_roles'));
+
+  // await serve(
+  //     (Request req) => Response(200,
+  //         body: 'Olá, mundo!', headers: {'content-type': 'application/json'}),
+  //     'localhost',
+  //     8081);
 }
